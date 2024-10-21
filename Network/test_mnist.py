@@ -1,4 +1,5 @@
 import numpy as np
+import time
 from Neural_Network import Network
 import mnist_loader
 
@@ -9,7 +10,12 @@ X, Y = np.array(X), np.array(Y)
 X, Y = X[:,:,0], Y[:,:,0]
 
 network = Network([784, 30, 10], activation_function='sigmoid')
-network.train(X, Y, training_rate=3, batch_size=10, epochs=5)
+
+initial_time = time.time()
+network.train(X, Y, training_rate=3, batch_size=10, epochs=30)
+end_time = time.time()
+elapsed_time = np.round((end_time - initial_time), 2)
+print(f'Elapsed training time: {elapsed_time} seconds')
 
 X_val, Y_val = zip(*validation_data)
 
